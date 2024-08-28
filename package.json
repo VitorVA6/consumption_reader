@@ -1,0 +1,16 @@
+{
+  "name": "teste_tecnico_shopper",
+  "version": "1.0.0",
+  "main": "ts-node src/index.ts",
+  "scripts": {
+    "dev": "ts-node-dev src/server.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.5.4"
+  }
+}

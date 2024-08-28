@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "ts-node src/index.ts",
   "scripts": {
-    "dev": "ts-node-dev src/server.ts"
+    "dev": "ts-node-dev src/server.ts",
+    "lint": "eslint src/**/*.ts"
   },
   "keywords": [],
   "author": "",

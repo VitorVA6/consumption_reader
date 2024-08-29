@@ -1,3 +1,5 @@
+import { ListMeasureResDto } from '../../dtos/measure';
+
 export default interface IListMeasureService {
-  execute: (client_code: string, measure_type?: 'GAS' | 'WATER') => Promise<void>
+  execute: (customer_code: string, measure_type?: string) => Promise<ListMeasureResDto>
 }

@@ -17,6 +17,7 @@
     ]
   },
   "rules": {
+    "@typescript-eslint/naming-convention": "off",
     "@typescript-eslint/no-floating-promises": "off",
     "class-methods-use-this": "off",
     "no-console": "off",

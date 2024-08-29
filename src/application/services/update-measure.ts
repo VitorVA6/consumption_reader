@@ -1,4 +1,4 @@
-import IUpdateMeasureService from '../../domain/use-cases/measure/update';
+import IUpdateMeasureService from '../../domain/use-cases/update-measure';
 import { UpdateMeasureReqDto } from '../../domain/dtos/measure';
 import IMeasureRepository from '../repositories/measure';
 import MeasureNotFoundError from '../errors/measure-not-found-error';

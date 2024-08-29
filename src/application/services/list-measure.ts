@@ -1,4 +1,4 @@
-import IListMeasureService from '../../domain/use-cases/measure/list';
+import IListMeasureService from '../../domain/use-cases/list-measure';
 import { ListMeasureResDto } from '../../domain/dtos/measure';
 import IMeasureRepository from '../repositories/measure';
 import InvalidTypeError from '../errors/invalid-type-error';

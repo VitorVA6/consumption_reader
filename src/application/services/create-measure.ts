@@ -1,7 +1,7 @@
-import ICreateMeasureService from '../../../domain/use-cases/measure/create';
-import { CreateMeasureReqDto, CreateMeasureResDto } from '../../../domain/dtos/measure';
-import IMeasureRepository from '../../repositories/measure';
-import DoubleReportError from '../../errors/double-report-error';
+import ICreateMeasureService from '../../domain/use-cases/measure/create';
+import { CreateMeasureReqDto, CreateMeasureResDto } from '../../domain/dtos/measure';
+import IMeasureRepository from '../repositories/measure';
+import DoubleReportError from '../errors/double-report-error';
 
 export default class CreateMeasureService implements ICreateMeasureService {
   constructor(

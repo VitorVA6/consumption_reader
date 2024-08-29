@@ -1,8 +1,8 @@
-import IListMeasureService from '../../../domain/use-cases/measure/list';
-import { ListMeasureResDto } from '../../../domain/dtos/measure';
-import IMeasureRepository from '../../repositories/measure';
-import InvalidTypeError from '../../errors/invalid-type-error';
-import MeasuresNotFoundError from '../../errors/measures-not-found-error';
+import IListMeasureService from '../../domain/use-cases/measure/list';
+import { ListMeasureResDto } from '../../domain/dtos/measure';
+import IMeasureRepository from '../repositories/measure';
+import InvalidTypeError from '../errors/invalid-type-error';
+import MeasuresNotFoundError from '../errors/measures-not-found-error';
 
 export default class ListMeasureService implements IListMeasureService {
   constructor(

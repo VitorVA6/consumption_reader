@@ -1,8 +1,8 @@
-import IUpdateMeasureService from '../../../domain/use-cases/measure/update';
-import { UpdateMeasureReqDto } from '../../../domain/dtos/measure';
-import IMeasureRepository from '../../repositories/measure';
-import MeasureNotFoundError from '../../errors/measure-not-found-error';
-import ConfirmationDuplicateError from '../../errors/confirmation-duplicate-error';
+import IUpdateMeasureService from '../../domain/use-cases/measure/update';
+import { UpdateMeasureReqDto } from '../../domain/dtos/measure';
+import IMeasureRepository from '../repositories/measure';
+import MeasureNotFoundError from '../errors/measure-not-found-error';
+import ConfirmationDuplicateError from '../errors/confirmation-duplicate-error';
 
 export default class UpdateMeasureService implements IUpdateMeasureService {
   constructor(

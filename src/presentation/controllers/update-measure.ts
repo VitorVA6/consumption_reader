@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import IUpdateMeasureService from '../../domain/use-cases/measure/update';
+import IUpdateMeasureService from '../../domain/use-cases/update-measure';
 
 export default class UpdateMeasureController {
   constructor(

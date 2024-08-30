@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
-import IListMeasureService from '../../domain/use-cases/measure/list';
 import InvalidTypeError from '../../application/errors/invalid-type-error';
+import IListMeasureService from '../../domain/use-cases/list-measure';
 
 export default class ListMeasureController {
   constructor(

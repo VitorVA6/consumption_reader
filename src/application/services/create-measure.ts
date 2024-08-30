@@ -13,7 +13,11 @@ export default class CreateMeasureService implements ICreateMeasureService {
     const measure_data = this.data_validator(data);
 
     const measure = await this.measure_repository
-      .find_by_date_and_type(measure_data.measure_datetime, measure_data.measure_type);
+      .find_by_date_and_type_and_customer(
+        measure_data.measure_datetime,
+        measure_data.measure_type,
+        measure_data.customer_code,
+      );
 
     if (measure) throw new DoubleReportError();
 

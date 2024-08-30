@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import ICreateMeasureService from '../../domain/use-cases/measure/create';
+import ICreateMeasureService from '../../domain/use-cases/create-measure';
 
 export default class CreateMeasureController {
   constructor(

@@ -43,14 +43,20 @@ export default class PostgreMeasureRepository implements IMeasureRepository {
     return found_measures;
   }
 
-  async find_by_date_and_type(date: Date, measure_type: 'GAS' | 'WATER'): Promise<Measure | null> {
+  async find_by_date_and_type_and_customer(date: Date, measure_type: 'GAS' | 'WATER', customer_code: string): Promise<Measure | null> {
+    const isoDate = date.toISOString(); // Converta a data para string ISO
     const record = await this.measure_table.findOne({
       where: {
         measure_type,
-        measure_datetime: Raw((alias) => `DATE_TRUNC('month', ${alias}) = DATE_TRUNC('month', '${date.toISOString()}')`),
+        measure_datetime: Raw((alias) => `DATE_TRUNC('month', ${alias}) = DATE_TRUNC('month', ${this.getRawDateString(isoDate)})`),
+        customer_code,
       },
     });
 
     return record;
+  }
+
+  private getRawDateString(date: string): string {
+    return `'${date}'::timestamp`;
   }
 }

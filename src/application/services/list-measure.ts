@@ -11,7 +11,7 @@ export default class ListMeasureService implements IListMeasureService {
 
   async execute(customer_code: string, measure_type?: string): Promise<ListMeasureResDto> {
     const measure_type_upper = measure_type ? measure_type.toUpperCase() : undefined;
-    if (measure_type_upper !== 'GAS' && measure_type_upper !== 'WATER') {
+    if (measure_type_upper !== 'GAS' && measure_type_upper !== 'WATER' && measure_type_upper !== undefined) {
       throw new InvalidTypeError();
     }
 

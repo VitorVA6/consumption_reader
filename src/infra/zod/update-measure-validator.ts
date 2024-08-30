@@ -4,7 +4,7 @@ import InvalidDataError from '../../application/errors/invalid-data-error';
 
 export default function update_measure_validator(data: unknown): UpdateMeasureReqDto {
   const zod_schema = z.object({
-    measure_uuid: z.string(),
+    measure_uuid: z.string().uuid(),
     confirmed_value: z.number().int(),
   });
 

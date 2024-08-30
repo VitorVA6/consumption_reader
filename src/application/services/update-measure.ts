@@ -21,6 +21,7 @@ export default class UpdateMeasureService implements IUpdateMeasureService {
     await this.measure_repository.update({
       ...measure,
       measure_value: measure_data.confirmed_value,
+      has_confirmed: true,
     });
   }
 }

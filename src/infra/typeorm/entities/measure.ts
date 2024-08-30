@@ -13,7 +13,7 @@ export default class Measure {
   @Column('varchar')
     measure_type!: 'GAS' | 'WATER';
 
-  @Column('datetime')
+  @Column('timestamp')
     measure_datetime!: Date;
 
   @Column('boolean')

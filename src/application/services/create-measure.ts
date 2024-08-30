@@ -2,11 +2,15 @@ import ICreateMeasureService from '../../domain/use-cases/create-measure';
 import { CreateMeasureReqDto, CreateMeasureResDto } from '../../domain/dtos/measure';
 import IMeasureRepository from '../repositories/measure';
 import DoubleReportError from '../errors/double-report-error';
+import { ImageData } from '../../infra/base64/base64-converter';
+import AIManager from '../providers/ai-manager';
 
 export default class CreateMeasureService implements ICreateMeasureService {
   constructor(
     private readonly measure_repository: IMeasureRepository,
     private readonly data_validator: (data: unknown) => CreateMeasureReqDto,
+    private readonly baseb4_converter: (data: string) => ImageData,
+    private readonly ai_manager: AIManager,
   ) {}
 
   async execute(data: unknown): Promise<CreateMeasureResDto> {
@@ -21,9 +25,14 @@ export default class CreateMeasureService implements ICreateMeasureService {
 
     if (measure) throw new DoubleReportError();
 
+    const image_data = this.baseb4_converter(measure_data.image);
+
+    const image_url = await this.ai_manager.upload(image_data.file_path, image_data.mime);
+    console.log(image_url);
+
     const created_measure = await this.measure_repository.create({
       ...measure_data,
-      image_url: 'aaa',
+      image_url,
       measure_value: 12,
       has_confirmed: false,
     });

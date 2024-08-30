@@ -4,7 +4,7 @@ import InvalidDataError from '../../application/errors/invalid-data-error';
 
 export default function create_measure_validator(data: unknown): CreateMeasureReqDto {
   const zod_schema = z.object({
-    image: z.string().base64(),
+    image: z.string(),
     customer_code: z.string(),
     measure_datetime: z.coerce.date(),
     measure_type: z.enum(['GAS', 'WATER']),

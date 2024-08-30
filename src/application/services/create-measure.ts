@@ -27,13 +27,15 @@ export default class CreateMeasureService implements ICreateMeasureService {
 
     const image_data = this.baseb4_converter(measure_data.image);
 
-    const image_url = await this.ai_manager.upload(image_data.file_path, image_data.mime);
-    console.log(image_url);
+    const upload_data = await this.ai_manager.upload(image_data.file_path, image_data.mime);
+
+    const text_measure = await this.ai_manager.generate_content(upload_data.uri, upload_data.mime);
+    console.log(text_measure);
 
     const created_measure = await this.measure_repository.create({
       ...measure_data,
-      image_url,
-      measure_value: 12,
+      image_url: upload_data.uri,
+      measure_value: Number(text_measure),
       has_confirmed: false,
     });
 

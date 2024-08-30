@@ -1,8 +1,9 @@
 import { GoogleAIFileManager } from '@google/generative-ai/server';
-import AIManager from '../../application/providers/ai-manager';
+import { GoogleGenerativeAI } from '@google/generative-ai';
+import AIManager, { UploadOutput } from '../../application/providers/ai-manager';
 
 export default class GoogleAIManager implements AIManager {
-  async upload(path: string, mime: string): Promise<string> {
+  async upload(path: string, mime: string): Promise<UploadOutput> {
     const api_key = process.env.GEMINI_API_KEY || '';
 
     const file_manager = new GoogleAIFileManager(api_key);
@@ -11,6 +12,35 @@ export default class GoogleAIManager implements AIManager {
       displayName: 'customer_code',
     });
 
-    return upload_response.file.uri;
+    return {
+      uri: upload_response.file.uri,
+      mime: upload_response.file.mimeType,
+    };
+  }
+
+  async generate_content(image_url: string, mime: string): Promise<string> {
+    const api_key = process.env.GEMINI_API_KEY || '';
+    const gen_AI = new GoogleGenerativeAI(api_key);
+
+    console.log(image_url, mime);
+
+    const model = gen_AI.getGenerativeModel({
+      model: 'gemini-1.5-pro',
+    });
+    try {
+      const result = await model.generateContent([
+        {
+          fileData: {
+            mimeType: mime,
+            fileUri: image_url,
+          },
+        },
+        { text: 'tell me an integer between 0 and 100' },
+      ]);
+      return result.response.text();
+    } catch (err) {
+      console.log(err);
+      return '0';
+    }
   }
 }

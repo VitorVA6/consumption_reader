@@ -7,9 +7,12 @@ dotenv.config();
 
 const AppDataSource = new DataSource({
   type: 'postgres',
-  url: process.env.DB_URL,
+  host: 'localhost',
+  port: 5432,
+  username: 'shopper',
+  password: 'shopper',
+  database: 'shopper',
   synchronize: true,
-  logging: false,
   entities: [
     Measure,
   ],

@@ -22,8 +22,6 @@ export default class GoogleAIManager implements AIManager {
     const api_key = process.env.GEMINI_API_KEY || '';
     const gen_AI = new GoogleGenerativeAI(api_key);
 
-    console.log(image_url, mime);
-
     const model = gen_AI.getGenerativeModel({
       model: 'gemini-1.5-pro',
     });
@@ -39,7 +37,6 @@ export default class GoogleAIManager implements AIManager {
       ]);
       return result.response.text();
     } catch (err) {
-      console.log(err);
       return '0';
     }
   }

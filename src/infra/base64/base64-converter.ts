@@ -1,6 +1,6 @@
 import isBase64 from 'is-base64';
 import path from 'path';
-import fs from 'fs';
+import fs from 'fs/promises';
 import InvalidDataError from '../../application/errors/invalid-data-error';
 
 export type ImageData = {
@@ -8,7 +8,7 @@ export type ImageData = {
   mime: string,
 };
 
-export default function base64_to_file(base64: string): ImageData {
+export default async function base64_to_file(base64: string): Promise<ImageData> {
   const allowed_mimes = ['image/png', 'image/jpeg', 'image/webp', 'image/heic', 'image/heif'];
   if (!isBase64(base64, { mimeRequired: true })) throw new InvalidDataError('Formato de imagem não é base 64 ou está faltando o mime type');
 
@@ -18,16 +18,14 @@ export default function base64_to_file(base64: string): ImageData {
 
   if (!allowed_mimes.includes(mime)) throw new InvalidDataError('Mime type do arquivo não é permitido');
 
-  const path_src = path.join(__dirname, '..', '..');
-  const file_path = path.join(path_src, 'presentation', 'temp', `image.${mime.split('/')[1]}`);
+  const file_path = path.join(__dirname, `image.${mime.split('/')[1]}`);
 
-  fs.writeFile(file_path, image_buffer, (err) => {
-    if (err) {
-      console.error('Erro ao salvar a imagem:', err);
-    } else {
-      console.log('Imagem salva com sucesso!');
-    }
-  });
+  try {
+    await fs.writeFile(file_path, image_buffer);
+    console.log('Imagem salva com sucesso!');
+  } catch (err) {
+    console.log(err);
+  }
 
   return {
     file_path,

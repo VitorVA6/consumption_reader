@@ -9,7 +9,7 @@ export default class CreateMeasureService implements ICreateMeasureService {
   constructor(
     private readonly measure_repository: IMeasureRepository,
     private readonly data_validator: (data: unknown) => CreateMeasureReqDto,
-    private readonly baseb4_converter: (data: string) => ImageData,
+    private readonly baseb4_converter: (data: string) => Promise<ImageData>,
     private readonly ai_manager: AIManager,
   ) {}
 
@@ -25,12 +25,11 @@ export default class CreateMeasureService implements ICreateMeasureService {
 
     if (measure) throw new DoubleReportError();
 
-    const image_data = this.baseb4_converter(measure_data.image);
+    const image_data = await this.baseb4_converter(measure_data.image);
 
     const upload_data = await this.ai_manager.upload(image_data.file_path, image_data.mime);
 
     const text_measure = await this.ai_manager.generate_content(upload_data.uri, upload_data.mime);
-    console.log(text_measure);
 
     const created_measure = await this.measure_repository.create({
       ...measure_data,

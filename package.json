@@ -3,8 +3,10 @@
   "version": "1.0.0",
   "main": "ts-node src/index.ts",
   "scripts": {
+    "build": "tsc",
     "dev": "ts-node-dev src/server.ts",
-    "lint": "eslint src/**/*.ts"
+    "lint": "eslint src/**/*.ts",
+    "start": "node build/server.js"
   },
   "keywords": [],
   "author": "",
